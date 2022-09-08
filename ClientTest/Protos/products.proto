@@ -1,0 +1,34 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "ClientTest";
+
+package products;
+
+// The greeting service definition.
+service ProductsService {
+  // Sends a greeting
+    rpc GetAll(Empty) returns(Products);
+    rpc GetById(ProductRowIdFilter) returns(Product);
+    rpc Post(Product) returns(Product);
+    rpc Put(Product) returns(Product);
+    rpc Delete(ProductRowIdFilter) returns(Empty);
+}
+
+message Empty {}
+
+message Product {
+    int32 ProductRowId = 1;
+    string ProductId = 2;
+    string ProductName = 3;
+    string CategoryName = 4;
+    string Manufacturer = 5;
+    int32 Price = 6;
+    google.protobuf.Timestamp CreateDate=7;
+}
+message ProductRowIdFilter {
+    int32 productRowId = 1;
+}
+message Products {
+    repeated Product items = 1;
+}
